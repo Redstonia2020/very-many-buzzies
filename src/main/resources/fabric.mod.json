@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "verymanybuzzies",
+  "version": "${version}",
+
+  "name": "Very Many Buzzies",
+  "description": "Makes bee nests generate much more often on trees. Useful for testing tree farms, primarily mangrove.",
+  "authors": [
+    "Redstonia"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.redstonia.verymanybuzzies.VeryManyBuzzies"
+    ]
+  },
+  "mixins": [
+    "verymanybuzzies.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.17",
+    "fabric-api": "*",
+    "minecraft": "~1.19.4",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
