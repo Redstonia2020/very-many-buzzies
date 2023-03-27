@@ -9,7 +9,9 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -24,8 +26,13 @@ public class BeehiveTreeDecoratorMixin {
     private static final Direction BEE_NEST_FACE = Direction.SOUTH;
     private static final Direction[] GENERATE_DIRECTIONS = Direction.Type.HORIZONTAL.stream().filter(direction -> direction != BEE_NEST_FACE.getOpposite()).toArray(Direction[]::new);
 
-    @Overwrite
-    public void generate(TreeDecorator.Generator generator) {
+    @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
+    private void onGenerate(TreeDecorator.Generator generator, CallbackInfo ci) {
+        generateGuaranteed(generator);
+        ci.cancel();
+    }
+
+    public void generateGuaranteed(TreeDecorator.Generator generator) {
         Random random = generator.getRandom();
 
         ObjectArrayList<BlockPos> leavesPositions = generator.getLeavesPositions();
