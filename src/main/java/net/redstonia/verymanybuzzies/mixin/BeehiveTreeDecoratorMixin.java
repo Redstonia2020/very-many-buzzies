@@ -34,19 +34,19 @@ public class BeehiveTreeDecoratorMixin {
 
     public void generateGuaranteed(TreeDecorator.Generator generator) {
         Random random = generator.getRandom();
-
         ObjectArrayList<BlockPos> leavesPositions = generator.getLeavesPositions();
         ObjectArrayList<BlockPos> logPositions = generator.getLogPositions();
-        int yLevelThing = !leavesPositions.isEmpty() ? Math.max((leavesPositions.get(0)).getY() - 1, (logPositions.get(0)).getY() + 1) : Math.min((logPositions.get(0)).getY() + 1 + random.nextInt(3), (logPositions.get(logPositions.size() - 1)).getY());
+        int yLevel = !leavesPositions.isEmpty() ? Math.max((leavesPositions.get(0)).getY() - 1, (logPositions.get(0)).getY() + 1) : Math.min((logPositions.get(0)).getY() + 1 + random.nextInt(3), (logPositions.get(logPositions.size() - 1)).getY());
 
-        List<BlockPos> list3 = logPositions.stream().filter(pos -> pos.getY() == yLevelThing).flatMap(pos -> Stream.of(GENERATE_DIRECTIONS).map(pos::offset)).toList();
-        if (list3.isEmpty()) { return; }
+        List<BlockPos> potentialBeenestSpots = logPositions.stream().filter(pos -> pos.getY() == yLevel).flatMap(pos -> Stream.of(GENERATE_DIRECTIONS).map(pos::offset)).toList();
+        if (potentialBeenestSpots.isEmpty()) { return; }
 
-        List<BlockPos> beenestSpots = list3.stream().filter(pos -> generator.isAir(pos) && generator.isAir(pos.offset(BEE_NEST_FACE))).toList();
-        if (beenestSpots.isEmpty()) { return; }
+        List<BlockPos> validBeenestSpots = potentialBeenestSpots.stream().filter(pos -> generator.isAir(pos) && generator.isAir(pos.offset(BEE_NEST_FACE))).toList();
+        if (validBeenestSpots.isEmpty()) { return; }
 
-        for (BlockPos spot : beenestSpots) {
+        for (BlockPos spot : validBeenestSpots) {
             generator.replace(spot, Blocks.BEE_NEST.getDefaultState().with(BeehiveBlock.FACING, BEE_NEST_FACE));
+            // bees would normally be generated here.
         }
     }
 }
