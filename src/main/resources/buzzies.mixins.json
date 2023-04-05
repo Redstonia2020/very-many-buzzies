@@ -1,13 +1,15 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.redstonia.verymanybuzzies.mixin",
+  "package": "buzzies.mixin",
   "compatibilityLevel": "JAVA_17",
+
   "mixins": [
     "BeehiveTreeDecoratorMixin"
   ],
-  "client": [
-  ],
+  "server": [],
+  "client": [],
+
   "injectors": {
     "defaultRequire": 1
   }

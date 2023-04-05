@@ -14,16 +14,16 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/verymanybuzzies/icon.png",
+  "icon": "assets/buzzies/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.redstonia.verymanybuzzies.VeryManyBuzzies"
+      "buzzies.VeryManyBuzzies"
     ]
   },
   "mixins": [
-    "verymanybuzzies.mixins.json"
+    "buzzies.mixins.json"
   ],
 
   "depends": {
