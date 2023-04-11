@@ -11,13 +11,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BeehiveTreeDecorator.class)
-public abstract class BeehiveTreeDecoratorMixin {
+public abstract class BeehiveTreeDecoratorMixin
+{
     @Shadow @Final
     private float probability;
 
     @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
-    private void onGenerate(TreeDecorator.Generator generator, CallbackInfo ci) {
-        if (probability < 1.0f) {
+    private void onGenerate(TreeDecorator.Generator generator, CallbackInfo ci)
+    {
+        if (probability < 1.0f)
+        {
             BeenestAlwaysDecorator.generate(generator);
             ci.cancel();
         }
