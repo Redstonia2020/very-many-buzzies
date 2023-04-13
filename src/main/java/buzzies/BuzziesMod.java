@@ -41,6 +41,6 @@ public class BuzziesMod implements ModInitializer, CarpetExtension
     @Override
     public Map<String, String> canHasTranslations(String lang)
     {
-        return BuzziesTranslations.getTranslationFromResourcePath(lang);
+        return BuzziesTranslations.getTranslation(lang);
     }
 }

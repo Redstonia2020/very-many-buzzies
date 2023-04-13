@@ -3,6 +3,8 @@ package buzzies.mixin;
 import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import buzzies.custom.BeenestAlwaysDecorator;
+import buzzies.BuzziesSettings;
+import buzzies.BuzziesSettings.BeenestGenerationOptions;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,10 +21,11 @@ public abstract class BeehiveTreeDecoratorMixin
     @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
     private void onGenerate(TreeDecorator.Generator generator, CallbackInfo ci)
     {
-        if (probability < 1.0f)
-        {
-            BeenestAlwaysDecorator.generate(generator);
+        if (BuzziesSettings.beenestGeneration.cancelsDecorator) {
             ci.cancel();
+            if (BuzziesSettings.beenestGeneration.usesModifiedDecorator && probability < 1.0f) {
+                BeenestAlwaysDecorator.generate(generator);
+            }
         }
     }
 }
