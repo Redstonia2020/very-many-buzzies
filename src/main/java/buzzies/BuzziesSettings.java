@@ -8,24 +8,20 @@ public class BuzziesSettings
 {
     public enum BeenestGenerationOptions
     {
-        vanilla(false),
-        off(true),
-        always(true, true),
-        alwaysAll(true, true);
+        VANILLA(false, false),
+        OFF(true, false),
+        ALWAYS(true, true),
+        ALWAYS_ALL(true, true);
 
-        public final boolean cancelsDecorator;
+        public final boolean cancelsDefaultDecorator;
         public final boolean usesModifiedDecorator;
 
         BeenestGenerationOptions(boolean cancel, boolean modified) {
-            this.cancelsDecorator = cancel;
+            this.cancelsDefaultDecorator = cancel;
             this.usesModifiedDecorator = modified;
-        }
-
-        BeenestGenerationOptions(boolean cancel) {
-            this(cancel, false);
         }
     }
 
     @Rule(categories = {CREATIVE})
-    public static BeenestGenerationOptions beenestGeneration = BeenestGenerationOptions.vanilla;
+    public static BeenestGenerationOptions beenestGeneration = BeenestGenerationOptions.VANILLA;
 }
