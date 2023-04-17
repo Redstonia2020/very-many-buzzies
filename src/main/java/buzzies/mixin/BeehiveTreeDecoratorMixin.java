@@ -20,9 +20,9 @@ public abstract class BeehiveTreeDecoratorMixin
     @Inject(method = "generate", at = @At("HEAD"), cancellable = true)
     private void onGenerate(TreeDecorator.Generator generator, CallbackInfo ci)
     {
-        if (BuzziesSettings.beenestGeneration.cancelsDefaultDecorator && probability < 1.0f) {
+        if (BuzziesSettings.beenestGeneration.cancelsDefaultDecorator() && probability < 1.0f) {
             ci.cancel();
-            if (BuzziesSettings.beenestGeneration.usesModifiedDecorator) {
+            if (BuzziesSettings.beenestGeneration.usesModifiedDecorator()) {
                 BeenestAlwaysDecorator.generate(generator);
             }
         }

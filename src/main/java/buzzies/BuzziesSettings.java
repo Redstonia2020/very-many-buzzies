@@ -8,17 +8,14 @@ public class BuzziesSettings
 {
     public enum BeenestGenerationOptions
     {
-        VANILLA(false, false),
-        OFF(true, false),
-        ALWAYS(true, true),
-        ALWAYS_ALL(true, true);
+        VANILLA, OFF, ALWAYS, ALWAYS_ALL;
 
-        public final boolean cancelsDefaultDecorator;
-        public final boolean usesModifiedDecorator;
+        public boolean cancelsDefaultDecorator() {
+            return this != VANILLA;
+        }
 
-        BeenestGenerationOptions(boolean cancel, boolean modified) {
-            this.cancelsDefaultDecorator = cancel;
-            this.usesModifiedDecorator = modified;
+        public boolean usesModifiedDecorator() {
+            return this == ALWAYS || this == ALWAYS_ALL;
         }
     }
 
