@@ -7,7 +7,7 @@ import static carpet.api.settings.RuleCategory.*;
 public class CarpetBuzziesSettings {
     public static final String BUZZIES = "buzzies";
 
-    public enum BeenestGenerationOptions {
+    public enum BeeNestGenerationOptions {
         VANILLA, OFF, ALWAYS, ALWAYS_ALL;
 
         public boolean cancelsDefaultDecorator() {
@@ -20,5 +20,8 @@ public class CarpetBuzziesSettings {
     }
 
     @Rule(categories = {BUZZIES, CREATIVE})
-    public static BeenestGenerationOptions beenestGeneration = BeenestGenerationOptions.VANILLA;
+    public static BeeNestGenerationOptions beeNestGeneration = BeeNestGenerationOptions.VANILLA;
+
+    @Rule(categories = {BUZZIES, CREATIVE})
+    public static boolean beeNestsGenerateBees = true;
 }

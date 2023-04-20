@@ -1,3 +1,4 @@
 {
-  "carpet.rule.beenestGeneration.desc": "Changes how beenests generate on trees."
+  "carpet.rule.beeNestGeneration.desc": "Changes how bee nests generate on trees.",
+  "carpet.rule.beeNestsGenerateBees.desc": "Controls whether or not bees will generate inside new bee nests."
 }
