@@ -3,7 +3,7 @@
   "id": "buzzies",
   "version": "${version}",
 
-  "name": "Very Many Buzzies",
+  "name": "Carpet Buzzies",
   "description": "Makes bee nests generate much more often on trees. Useful for testing tree farms, primarily mangrove.",
   "authors": [
     "Redstonia"
@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "buzzies.BuzziesMod"
+      "buzzies.CarpetBuzziesMod"
     ]
   },
   "mixins": [
