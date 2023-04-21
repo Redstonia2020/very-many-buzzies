@@ -2,6 +2,10 @@ package buzzies.mixin;
 
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.EntityType;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -43,15 +47,6 @@ public abstract class BeehiveTreeDecoratorMixin {
     }
 
     @Inject(method = "generate",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/treedecorator/TreeDecorator$Generator;replace(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", shift = At.Shift.AFTER),
-            cancellable = true)
-    private void preventBees(TreeDecorator.Generator generator, CallbackInfo ci) {
-        if (!CarpetBuzziesSettings.beeNestsGenerateBees) {
-            ci.cancel();
-        }
-    }
-
-    @Inject(method = "generate",
             at = @At(value = "INVOKE", target = "Ljava/util/Collections;shuffle(Ljava/util/List;)V"),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILHARD)
@@ -69,6 +64,31 @@ public abstract class BeehiveTreeDecoratorMixin {
                 .toList();
         for (BlockPos pos : validPositions) {
             generator.replace(pos, Blocks.BEE_NEST.getDefaultState().with(BeehiveBlock.FACING, BEE_NEST_FACE));
+            if (CarpetBuzziesSettings.beeNestsGenerateBees) {
+                generateBeesInNest(generator, pos);
+            }
+        }
+    }
+
+    private void generateBeesInNest(TreeDecorator.Generator generator, BlockPos pos) {
+        Random random = generator.getRandom();
+
+        generator.getWorld().getBlockEntity(pos, BlockEntityType.BEEHIVE).ifPresent(blockEntity -> {
+            int beesAmount = 2 + random.nextInt(2);
+            for (int i = 0; i < beesAmount; i++) {
+                NbtCompound nbtCompound = new NbtCompound();
+                nbtCompound.putString("id", Registries.ENTITY_TYPE.getId(EntityType.BEE).toString());
+                blockEntity.addBee(nbtCompound, random.nextInt(599), false);
+            }
+        });
+    }
+
+    @Inject(method = "generate",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/TestableWorld;getBlockEntity(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/entity/BlockEntityType;)Ljava/util/Optional;"),
+            cancellable = true)
+    private void preventBees(TreeDecorator.Generator generator, CallbackInfo ci) {
+        if (!CarpetBuzziesSettings.beeNestsGenerateBees) {
+            ci.cancel();
         }
     }
 }
