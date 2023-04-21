@@ -1,4 +1,8 @@
 {
   "carpet.rule.beeNestGeneration.desc": "Changes how bee nests generate on trees.",
+  "carpet.rule.beeNestGeneration.extra.0": "always - Trees always try to generate a bee nest, instead of only on a 5% (or 1% with mangrove) chance.",
+  "carpet.rule.beeNestGeneration.extra.1": "always_all - Same as above, but will generate a nest in all considered spots. This means you can get multiple to generate on a single tree.",
+  "carpet.rule.beeNestGeneration.extra.2": "Note: while always and always_all increase how often nests will generate, they should NEVER generate a nest where it wouldn't normally generate in vanilla.",
+
   "carpet.rule.beeNestsGenerateBees.desc": "Controls whether or not bees will generate inside new bee nests."
 }
