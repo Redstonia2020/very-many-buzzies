@@ -13,7 +13,7 @@
     "sources": "https://github.com/Redstonia2020/very-many-buzzies"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/buzzies/icon.png",
 
   "environment": "*",
