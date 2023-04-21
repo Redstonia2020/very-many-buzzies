@@ -24,7 +24,6 @@ public class CarpetBuzziesTranslations {
         }
 
         InputStream languageFile = resources.getResourceAsStream("assets/buzzies/lang/%s.json".formatted(lang));
-
         String fileContent;
         try {
             fileContent = IOUtils.toString(languageFile, StandardCharsets.UTF_8);

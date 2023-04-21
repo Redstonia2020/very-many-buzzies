@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "buzzies",
+  "id": "carpet-buzzies",
   "version": "${version}",
 
   "name": "Carpet Buzzies",
-  "description": "Makes bee nests generate much more often on trees. Useful for testing tree farms, primarily mangrove.",
+  "description": "Adds the option to change how bee nests generate, including making them generate much more often.",
   "authors": [
     "Redstonia"
   ],
