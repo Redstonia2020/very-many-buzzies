@@ -9,14 +9,7 @@ public class CarpetBuzziesSettings {
 
     public enum BeeNestGenerationOptions {
         VANILLA, OFF, ALWAYS, ALWAYS_ALL;
-
-        public boolean cancelsDefaultDecorator() {
-            return this != VANILLA;
-        }
-
-        public boolean usesAlwaysDecorator() {
-            return this == ALWAYS || this == ALWAYS_ALL;
-        }
+        public boolean alwaysGenerates() { return this == ALWAYS || this == ALWAYS_ALL; }
     }
 
     @Rule(categories = {BUZZIES, CREATIVE})
