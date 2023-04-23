@@ -13,9 +13,9 @@ import java.util.Map;
 
 
 // kinda just yonked from Carpet Extra sorries
-public class CarpetBuzziesTranslations {
+public class BuzziesTranslations {
     private static final List<String> supportedLanguages = List.of("en_us");
-    private static final ClassLoader resources = CarpetBuzziesTranslations.class.getClassLoader();
+    private static final ClassLoader resources = BuzziesTranslations.class.getClassLoader();
     private static final Gson gson = new Gson();
 
     public static Map<String, String> getTranslation(String lang) {

@@ -5,19 +5,19 @@ import carpet.CarpetServer;
 
 import java.util.Map;
 
-public class CarpetBuzziesExtension implements CarpetExtension {
+public class BuzziesExtension implements CarpetExtension {
     @Override
     public String version() {
-        return CarpetBuzziesMod.MOD_ID;
+        return BuzziesMod.MOD_ID;
     }
 
     @Override
     public void onGameStarted() {
-        CarpetServer.settingsManager.parseSettingsClass(CarpetBuzziesSettings.class);
+        CarpetServer.settingsManager.parseSettingsClass(BuzziesSettings.class);
     }
 
     @Override
     public Map<String, String> canHasTranslations(String lang) {
-        return CarpetBuzziesTranslations.getTranslation(lang);
+        return BuzziesTranslations.getTranslation(lang);
     }
 }

@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "buzzies.CarpetBuzziesMod"
+      "buzzies.BuzziesMod"
     ]
   },
   "mixins": [

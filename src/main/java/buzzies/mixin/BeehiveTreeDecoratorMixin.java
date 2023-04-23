@@ -1,5 +1,6 @@
 package buzzies.mixin;
 
+import buzzies.BuzziesSettings;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
@@ -11,8 +12,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.gen.treedecorator.BeehiveTreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
-import buzzies.CarpetBuzziesSettings;
-import buzzies.CarpetBuzziesSettings.BeeNestGenerationOptions;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,8 +20,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-
 import java.util.List;
+
+import static buzzies.BuzziesSettings.BeeNestGenerationOptions.*;
 
 @Mixin(BeehiveTreeDecorator.class)
 public abstract class BeehiveTreeDecoratorMixin {
@@ -33,7 +33,7 @@ public abstract class BeehiveTreeDecoratorMixin {
             at = @At("HEAD"),
             cancellable = true)
     private void cancelGeneration(TreeDecorator.Generator generator, CallbackInfo ci) {
-        if (CarpetBuzziesSettings.beeNestGeneration == BeeNestGenerationOptions.OFF) {
+        if (BuzziesSettings.beeNestGeneration == OFF) {
             ci.cancel();
         }
     }
@@ -41,7 +41,7 @@ public abstract class BeehiveTreeDecoratorMixin {
     @Redirect(method = "generate",
               at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/random/Random;nextFloat()F"))
     private float alwaysGenerate(Random random) {
-        if (CarpetBuzziesSettings.beeNestGeneration.alwaysGenerates())
+        if (BuzziesSettings.beeNestGeneration.alwaysGenerates())
             return 0f;
         return random.nextFloat();
     }
@@ -52,7 +52,7 @@ public abstract class BeehiveTreeDecoratorMixin {
             locals = LocalCapture.CAPTURE_FAILHARD)
     private void generateInAllPositions(TreeDecorator.Generator generator, CallbackInfo ci, Random random, List list, List list2, int i, List<BlockPos> list3) {
         // would be nice to get rid of unused things, but I've no braincells to get that to work
-        if (CarpetBuzziesSettings.beeNestGeneration == CarpetBuzziesSettings.BeeNestGenerationOptions.ALWAYS_ALL) {
+        if (BuzziesSettings.beeNestGeneration == ALWAYS_ALL) {
             ci.cancel();
             tryGenerateNestInPositions(generator, list3);
         }
@@ -64,7 +64,7 @@ public abstract class BeehiveTreeDecoratorMixin {
                 .toList();
         for (BlockPos pos : validPositions) {
             generator.replace(pos, Blocks.BEE_NEST.getDefaultState().with(BeehiveBlock.FACING, BEE_NEST_FACE));
-            if (CarpetBuzziesSettings.beeNestsGenerateBees) {
+            if (BuzziesSettings.beeNestsGenerateBees) {
                 generateBeesInNest(generator, pos);
             }
         }
@@ -87,7 +87,7 @@ public abstract class BeehiveTreeDecoratorMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/TestableWorld;getBlockEntity(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/entity/BlockEntityType;)Ljava/util/Optional;"),
             cancellable = true)
     private void preventBees(TreeDecorator.Generator generator, CallbackInfo ci) {
-        if (!CarpetBuzziesSettings.beeNestsGenerateBees) {
+        if (!BuzziesSettings.beeNestsGenerateBees) {
             ci.cancel();
         }
     }
