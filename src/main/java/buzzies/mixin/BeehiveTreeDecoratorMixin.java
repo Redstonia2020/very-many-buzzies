@@ -1,6 +1,6 @@
 package buzzies.mixin;
 
-import buzzies.BuzziesSettings;
+import buzzies.settings.BuzziesSettings;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.List;
 
-import static buzzies.BuzziesSettings.BeeNestGenerationOptions.*;
+import static buzzies.settings.BuzziesSettings.BeeNestGenerationOptions.*;
 
 @Mixin(BeehiveTreeDecorator.class)
 public abstract class BeehiveTreeDecoratorMixin {

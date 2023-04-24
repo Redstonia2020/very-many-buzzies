@@ -1,6 +1,6 @@
 package buzzies.mixin;
 
-import buzzies.BuzziesSettings;
+import buzzies.settings.BuzziesSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.server.world.ServerWorld;

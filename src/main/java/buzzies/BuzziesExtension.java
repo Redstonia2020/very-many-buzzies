@@ -1,5 +1,6 @@
 package buzzies;
 
+import buzzies.settings.BuzziesSettings;
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
 

@@ -1,6 +1,6 @@
 package buzzies.mixin;
 
-import buzzies.BuzziesSettings;
+import buzzies.settings.BuzziesSettings;
 import net.minecraft.fluid.WaterFluid;
 import net.minecraft.world.WorldView;
 import org.spongepowered.asm.mixin.Mixin;

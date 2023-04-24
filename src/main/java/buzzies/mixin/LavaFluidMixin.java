@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static buzzies.BuzziesSettings.lavaFlowRate;
-import static buzzies.BuzziesSettings.lavaFlowRateUltrawarm;
+import static buzzies.settings.BuzziesSettings.lavaFlowRate;
+import static buzzies.settings.BuzziesSettings.lavaFlowRateUltrawarm;
 
 @Mixin(LavaFluid.class)
 public class LavaFluidMixin {
