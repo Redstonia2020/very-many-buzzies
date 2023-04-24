@@ -20,4 +20,13 @@ public class BuzziesSettings {
 
     @Rule(categories = {BUZZIES, CREATIVE})
     public static boolean instantLeafDecay = false;
+
+    @Rule(categories = {BUZZIES, CREATIVE})
+    public static int waterFlowRate = 5;
+
+    @Rule(categories = {BUZZIES, CREATIVE})
+    public static int lavaFlowRate = 30;
+
+    @Rule(categories = {BUZZIES, CREATIVE})
+    public static int lavaFlowRateUltrawarm = 10;
 }

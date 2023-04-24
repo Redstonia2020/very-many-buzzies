@@ -7,5 +7,11 @@
 
   "carpet.rule.instantLeafDecay.desc": "Forces leaves to instantly decay as soon as the last log is removed.",
   "carpet.rule.instantLeafDecay.extra.0": "Player placed leaves are unaffected, so your leafstone stuff is fineee!",
-  "carpet.rule.instantLeafDecay.extra.1": "Slightly weird when using /fill or /setblock with it."
+  "carpet.rule.instantLeafDecay.extra.1": "Slightly weird when using /fill or /setblock with it.",
+
+  "carpet.rule.waterFlowRate.desc": "Controls how quickly water flows.",
+
+  "carpet.rule.lavaFlowRate.desc": "Controls how quickly lava flows outside the nether.",
+
+  "carpet.rule.lavaFlowRateUltrawarm.desc": "Controls how quickly lava flows within the nether."
 }

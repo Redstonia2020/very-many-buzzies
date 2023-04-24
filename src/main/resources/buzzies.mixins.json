@@ -6,7 +6,9 @@
 
   "mixins": [
     "BeehiveTreeDecoratorMixin",
-    "LeavesBlockMixin"
+    "LeavesBlockMixin",
+    "WaterFluidMixin",
+    "LavaFluidMixin"
   ],
   "server": [],
   "client": [],
