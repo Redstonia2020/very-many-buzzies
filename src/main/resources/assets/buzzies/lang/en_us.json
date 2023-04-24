@@ -1,8 +1,11 @@
 {
   "carpet.rule.beeNestGeneration.desc": "Changes how bee nests generate on trees.",
-  "carpet.rule.beeNestGeneration.extra.0": "always - Trees always try to generate a bee nest, instead of only on a 5% (or 1% with mangrove) chance.",
-  "carpet.rule.beeNestGeneration.extra.1": "always_all - Same as above, but will generate a nest in all considered spots. This means you can get multiple to generate on a single tree.",
-  "carpet.rule.beeNestGeneration.extra.2": "Note: while always and always_all increase how often nests will generate, they should NEVER generate a nest where it wouldn't normally generate in vanilla.",
+  "carpet.rule.beeNestGeneration.extra.0": "always - Trees have a 100% chance to try to generate a nest.",
+  "carpet.rule.beeNestGeneration.extra.1": "always_all - Same as above, but will also generate a nest in all considered spots.",
 
-  "carpet.rule.beeNestsGenerateBees.desc": "Controls whether or not bees will generate inside new bee nests."
+  "carpet.rule.beeNestsGenerateBees.desc": "Controls whether or not bees will generate inside new bee nests.",
+
+  "carpet.rule.instantLeafDecay.desc": "Forces leaves to instantly decay as soon as the last log is removed.",
+  "carpet.rule.instantLeafDecay.extra.0": "Player placed leaves are unaffected, so your leafstone stuff is fineee!",
+  "carpet.rule.instantLeafDecay.extra.1": "Slightly weird when using /fill or /setblock with it."
 }

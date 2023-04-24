@@ -17,4 +17,7 @@ public class BuzziesSettings {
 
     @Rule(categories = {BUZZIES, CREATIVE})
     public static boolean beeNestsGenerateBees = true;
+
+    @Rule(categories = {BUZZIES, CREATIVE})
+    public static boolean instantLeafDecay = false;
 }
