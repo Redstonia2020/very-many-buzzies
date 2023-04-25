@@ -14,4 +14,5 @@ public class BuzziesMod implements ModInitializer {
         //LOGGER.info("beenest gaming");
         CarpetServer.manageExtension(new BuzziesExtension());
     }
+
 }
