@@ -1,6 +1,4 @@
-# Very Many Buzzies
-A little mod that bumps up beenest generation chances on trees.
+# Carpet Buzzies
+_Carpet Buzzies_ (formerly _Very Many Buzzies,_ or simply just _Buzzies_ if you like to be lazy) is an extension for Carpet Mod ([fabric-carpet](https://github.com/gnembon/fabric-carpet)), that currently has only two features, both of which are related to bee nest generation on newly grown trees. However, this is quite quickly becoming a place where I just dump in whatever features I think will be useful, just cause.
 
-## But How-?
-So this just gets rid of the random probability that determines if a beenest even tries to generate, so that beenests attempt to generate 100% of the time instead of just 5% or 1%.
-As well as this, it also generates a beenest in every single spot that was considered for beenest generation, instead of just one of them. For straight trees like birch and small oak, this means you'll be often getting 3 beenests per tree rather than just one.
+You can find the current list of features [here](https://github.com/Redstoniaa/carpet-buzzies/wiki/Available-Settings).
