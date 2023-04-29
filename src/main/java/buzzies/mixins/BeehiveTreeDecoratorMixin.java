@@ -1,4 +1,4 @@
-package buzzies.mixin;
+package buzzies.mixins;
 
 import buzzies.settings.BuzziesSettings;
 import net.minecraft.block.BeehiveBlock;

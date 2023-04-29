@@ -1,19 +1,21 @@
-package buzzies.mixin;
+package buzzies.mixins;
 
-import buzzies.settings.BuzziesSettings;
-import net.minecraft.fluid.WaterFluid;
+import net.minecraft.fluid.LavaFluid;
 import net.minecraft.world.WorldView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(WaterFluid.class)
-public class WaterFluidMixin {
+import static buzzies.settings.BuzziesSettings.lavaFlowRate;
+import static buzzies.settings.BuzziesSettings.lavaFlowRateUltrawarm;
+
+@Mixin(LavaFluid.class)
+public class LavaFluidMixin {
     @Inject(method = "getTickRate",
             at = @At("TAIL"),
             cancellable = true)
     private void changeTickRate(WorldView world, CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(BuzziesSettings.waterFlowRate);
+        cir.setReturnValue(world.getDimension().ultrawarm() ? lavaFlowRateUltrawarm : lavaFlowRate);
     }
 }

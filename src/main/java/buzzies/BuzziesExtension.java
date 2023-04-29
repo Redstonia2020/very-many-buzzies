@@ -1,6 +1,6 @@
 package buzzies;
 
-import buzzies.commands.TimingCommand;
+import buzzies.commands.timing.TimingCommand;
 import buzzies.settings.BuzziesSettings;
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
