@@ -22,15 +22,15 @@ public class TimingCommand {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("timing")
-                .executes( (c) -> new TimingCommandExecution(c).defaultMessage() )
-                .then(branch("start", (execution) -> execution.start("message")))
-                .then(branch("log", (execution) -> execution.log("message")))
-                .then(branch("restart", (execution) -> execution.restart("message")))
+                .executes(command(e -> e.defaultMessage()))
+                .then(branch("start", e -> e.start("message")))
+                .then(branch("log", e -> e.log("message")))
+                .then(branch("restart", e -> e.restart("message")))
                 .then(literal("expects")
                         .then(argument("interval", integer(1))
-                                .executes(command( (execution) -> execution.setExpectInterval("interval") ))))
+                                .executes(command(e -> e.setExpectInterval("interval")))))
                         .then(literal("none")
-                                .executes(command( (execution) -> execution.disableExpecting() ))));
+                                .executes(command(e -> e.disableExpecting()))));
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> branch(String name, CommandExecutionRunner<TimingCommandExecution> runner) {
