@@ -1,5 +1,6 @@
 package buzzies.commands;
 
+import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.command.ServerCommandSource;

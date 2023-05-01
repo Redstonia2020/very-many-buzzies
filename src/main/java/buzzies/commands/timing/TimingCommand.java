@@ -1,5 +1,6 @@
 package buzzies.commands.timing;
 
+import buzzies.commands.CommandExecutionRunner;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -23,19 +24,23 @@ public class TimingCommand {
                 .executes( (c) -> new TimingCommandExecution(c).defaultMessage() )
                 .then(literal("start")
                         .then(argument("message", greedyString())
-                                .executes( (c) -> new TimingCommandExecution(c).start("message") )))
+                                .executes(command( (execution) -> execution.start("message") ))))
                 .then(literal("log")
                         .then(argument("message", greedyString())
-                                .executes( (c) -> new TimingCommandExecution(c).log("message") )))
+                                .executes(command( (execution) -> execution.log("message") ))))
                 .then(literal("restart")
                         .then(argument("message", greedyString())
-                                .executes( (c) -> new TimingCommandExecution(c).restart("message") )))
+                                .executes(command( (execution) -> execution.restart("message") ))))
                 .then(literal("expects")
                         .then(argument("interval", integer(1))
-                                .executes( (c) -> new TimingCommandExecution(c).setExpectInterval("interval") ))
+                                .executes(command( (execution) -> execution.setExpectInterval("interval") ))))
                         .then(literal("none")
-                                .executes( (c) -> new TimingCommandExecution(c).disableExpecting() )));
+                                .executes(command( (execution) -> execution.disableExpecting() )));
 
         dispatcher.register(baseCommand);
+    }
+
+    private static Command<ServerCommandSource> command(CommandExecutionRunner<TimingCommandExecution> runner) {
+        return (c) -> runner.run(new TimingCommandExecution(c));
     }
 }
