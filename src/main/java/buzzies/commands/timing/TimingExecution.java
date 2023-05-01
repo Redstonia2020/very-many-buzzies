@@ -1,19 +1,15 @@
 package buzzies.commands.timing;
 
-import buzzies.commands.CommandExecution;
-import buzzies.commands.CommandExecutionRunner;
-import com.mojang.brigadier.Command;
+import buzzies.commands.Execution;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.server.command.ServerCommandSource;
 
 import static buzzies.commands.timing.TimingCommand.*;
-import static buzzies.utils.CommandUtils.broadcast;
-import static buzzies.utils.CommandUtils.send;
 import static net.minecraft.util.Formatting.GREEN;
 import static net.minecraft.util.Formatting.RED;
 
-public class TimingCommandExecution extends CommandExecution {
-    public TimingCommandExecution(CommandContext<ServerCommandSource> context) {
+public class TimingExecution extends Execution {
+    public TimingExecution(CommandContext<ServerCommandSource> context) {
         super(context);
     }
 
@@ -28,7 +24,7 @@ public class TimingCommandExecution extends CommandExecution {
         String print = "[%s] 0 - %s".formatted(getGameTime(), message);
         broadcast(print, GREEN);
 
-        gameTimeStart = getGameTime();
+        timeStart = getGameTime();
 
         return 1;
     }
@@ -46,7 +42,7 @@ public class TimingCommandExecution extends CommandExecution {
         String message = getStringArgument(MESSAGE);
 
         long timeSinceStart = getTimeSinceStart();
-        if (!isExpecting) {
+        if (!isExpectingCycle) {
             String print = "[%s] %s - %s".formatted(getGameTime(), timeSinceStart, message);
             broadcast(print, GREEN);
         } else if (timeSinceStart != expectedInterval) {
@@ -54,7 +50,7 @@ public class TimingCommandExecution extends CommandExecution {
             broadcast(print, RED);
         }
 
-        gameTimeStart = getGameTime();
+        timeStart = getGameTime();
         return 1;
     }
 
@@ -62,13 +58,13 @@ public class TimingCommandExecution extends CommandExecution {
         int interval = getIntArgument(INTERVAL);
 
         expectedInterval = interval;
-        isExpecting = true;
+        isExpectingCycle = true;
         send("You are expected to yell at me every %s ticks.".formatted(interval));
         return 1;
     }
 
     public int disableExpecting() {
-        isExpecting = false;
+        isExpectingCycle = false;
         send("Finally free of all the expectations.");
         return 1;
     }
@@ -78,6 +74,6 @@ public class TimingCommandExecution extends CommandExecution {
     }
 
     private long getTimeSinceStart() {
-        return getGameTime() - gameTimeStart;
+        return getGameTime() - timeStart;
     }
 }

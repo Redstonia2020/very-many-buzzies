@@ -1,6 +1,6 @@
 package buzzies.commands;
 
 @FunctionalInterface
-public interface CommandExecutionRunner<T extends CommandExecution> {
+public interface ExecutionFunction<T extends Execution> {
     int run(T execution);
 }

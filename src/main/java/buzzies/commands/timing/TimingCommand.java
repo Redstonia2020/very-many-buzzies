@@ -1,6 +1,6 @@
 package buzzies.commands.timing;
 
-import buzzies.commands.CommandExecutionRunner;
+import buzzies.commands.ExecutionFunction;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -11,9 +11,8 @@ import static com.mojang.brigadier.arguments.IntegerArgumentType.*;
 import static net.minecraft.server.command.CommandManager.*;
 
 public class TimingCommand {
-    public static long gameTimeStart;
-
-    public static boolean isExpecting;
+    public static long timeStart;
+    public static boolean isExpectingCycle;
     public static int expectedInterval;
 
     public static final String MESSAGE = "message";
@@ -21,24 +20,24 @@ public class TimingCommand {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("timing")
-                .executes(command(TimingCommandExecution::defaultMessage))
-                .then(branch("start", TimingCommandExecution::start))
-                .then(branch("log", TimingCommandExecution::log))
-                .then(branch("restart", TimingCommandExecution::restart))
+                .executes(command(TimingExecution::defaultMessage))
+                .then(branch("start", TimingExecution::start))
+                .then(branch("log", TimingExecution::log))
+                .then(branch("restart", TimingExecution::restart))
                 .then(literal("expects")
                         .then(argument(INTERVAL, integer(1))
-                                .executes(command(TimingCommandExecution::setExpectInterval))))
+                                .executes(command(TimingExecution::setExpectInterval))))
                         .then(literal("none")
-                                .executes(command(TimingCommandExecution::disableExpecting))));
+                                .executes(command(TimingExecution::disableExpecting))));
     }
 
-    private static LiteralArgumentBuilder<ServerCommandSource> branch(String name, CommandExecutionRunner<TimingCommandExecution> runner) {
+    private static LiteralArgumentBuilder<ServerCommandSource> branch(String name, ExecutionFunction<TimingExecution> runner) {
         return literal(name)
                 .then(argument(MESSAGE, greedyString())
                         .executes(command(runner)));
     }
 
-    private static Command<ServerCommandSource> command(CommandExecutionRunner<TimingCommandExecution> runner) {
-        return (c) -> runner.run(new TimingCommandExecution(c));
+    private static Command<ServerCommandSource> command(ExecutionFunction<TimingExecution> runner) {
+        return (c) -> runner.run(new TimingExecution(c));
     }
 }

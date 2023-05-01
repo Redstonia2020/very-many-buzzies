@@ -1,6 +1,5 @@
 package buzzies.commands;
 
-import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -10,11 +9,11 @@ import net.minecraft.util.Formatting;
 import static com.mojang.brigadier.arguments.StringArgumentType.*;
 import static com.mojang.brigadier.arguments.IntegerArgumentType.*;
 
-public class CommandExecution {
+public class Execution {
     protected final CommandContext<ServerCommandSource> context;
     protected final ServerCommandSource source;
 
-    public CommandExecution(CommandContext<ServerCommandSource> context) {
+    public Execution(CommandContext<ServerCommandSource> context) {
         this.context = context;
         this.source = context.getSource();
     }
