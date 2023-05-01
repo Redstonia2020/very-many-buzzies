@@ -1,5 +1,6 @@
 package buzzies.commands.timing;
 
+import buzzies.commands.CommandExecution;
 import buzzies.commands.CommandExecutionRunner;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
@@ -20,24 +21,22 @@ public class TimingCommand {
     public static int expectedInterval;
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        LiteralArgumentBuilder<ServerCommandSource> baseCommand = literal("timing")
+        dispatcher.register(literal("timing")
                 .executes( (c) -> new TimingCommandExecution(c).defaultMessage() )
-                .then(literal("start")
-                        .then(argument("message", greedyString())
-                                .executes(command( (execution) -> execution.start("message") ))))
-                .then(literal("log")
-                        .then(argument("message", greedyString())
-                                .executes(command( (execution) -> execution.log("message") ))))
-                .then(literal("restart")
-                        .then(argument("message", greedyString())
-                                .executes(command( (execution) -> execution.restart("message") ))))
+                .then(branch("start", (execution) -> execution.start("message")))
+                .then(branch("log", (execution) -> execution.log("message")))
+                .then(branch("restart", (execution) -> execution.restart("message")))
                 .then(literal("expects")
                         .then(argument("interval", integer(1))
                                 .executes(command( (execution) -> execution.setExpectInterval("interval") ))))
                         .then(literal("none")
-                                .executes(command( (execution) -> execution.disableExpecting() )));
+                                .executes(command( (execution) -> execution.disableExpecting() ))));
+    }
 
-        dispatcher.register(baseCommand);
+    private static LiteralArgumentBuilder<ServerCommandSource> branch(String name, CommandExecutionRunner<TimingCommandExecution> runner) {
+        return literal(name)
+                .then(argument("message", greedyString())
+                        .executes(command(runner)));
     }
 
     private static Command<ServerCommandSource> command(CommandExecutionRunner<TimingCommandExecution> runner) {
