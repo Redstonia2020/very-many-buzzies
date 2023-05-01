@@ -22,8 +22,8 @@ public class TimingCommandExecution extends CommandExecution {
         return 1;
     }
 
-    public int start(String messageArg) {
-        String message = getStringArgument(messageArg);
+    public int start() {
+        String message = getStringArgument(MESSAGE);
 
         String print = "[%s] 0 - %s".formatted(getGameTime(), message);
         broadcast(print, GREEN);
@@ -33,8 +33,8 @@ public class TimingCommandExecution extends CommandExecution {
         return 1;
     }
 
-    public int log(String messageArg) {
-        String message = getStringArgument(messageArg);
+    public int log() {
+        String message = getStringArgument(MESSAGE);
 
         String print = "[%s] %s - %s".formatted(getGameTime(), getTimeSinceStart(), message);
         broadcast(print);
@@ -42,8 +42,8 @@ public class TimingCommandExecution extends CommandExecution {
         return 1;
     }
 
-    public int restart(String messageArg) {
-        String message = getStringArgument(messageArg);
+    public int restart() {
+        String message = getStringArgument(MESSAGE);
 
         long timeSinceStart = getTimeSinceStart();
         if (!isExpecting) {
@@ -58,8 +58,8 @@ public class TimingCommandExecution extends CommandExecution {
         return 1;
     }
 
-    public int setExpectInterval(String intervalArg) {
-        int interval = getIntArgument(intervalArg);
+    public int setExpectInterval() {
+        int interval = getIntArgument(INTERVAL);
 
         expectedInterval = interval;
         isExpecting = true;
