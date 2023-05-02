@@ -1,13 +1,16 @@
 package buzzies.commands;
 
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.BlockPos;
 
 import static com.mojang.brigadier.arguments.StringArgumentType.*;
 import static com.mojang.brigadier.arguments.IntegerArgumentType.*;
+import static net.minecraft.command.argument.BlockPosArgumentType.*;
 
 public class Execution {
     protected final CommandContext<ServerCommandSource> context;
@@ -24,6 +27,10 @@ public class Execution {
 
     protected int getIntArgument(String id) {
         return getInteger(context, id);
+    }
+
+    protected BlockPos getBlockPosArgument(String id) throws CommandSyntaxException {
+        return getBlockPos(context, id);
     }
 
     protected void send(String rawMessage, Formatting... format) {

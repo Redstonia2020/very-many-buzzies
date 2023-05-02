@@ -37,7 +37,7 @@ public class TimingCommand {
                         .executes(command(runner)));
     }
 
-    private static Command<ServerCommandSource> command(ExecutionFunction<TimingExecution> runner) {
-        return (c) -> runner.run(new TimingExecution(c));
+    private static Command<ServerCommandSource> command(ExecutionFunction<TimingExecution> function) {
+        return (c) -> function.run(new TimingExecution(c));
     }
 }

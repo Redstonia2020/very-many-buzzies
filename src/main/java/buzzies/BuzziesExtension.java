@@ -1,5 +1,6 @@
 package buzzies;
 
+import buzzies.commands.notebop.NotebopCommand;
 import buzzies.commands.timing.TimingCommand;
 import buzzies.settings.BuzziesSettings;
 import carpet.CarpetExtension;
@@ -24,6 +25,7 @@ public class BuzziesExtension implements CarpetExtension {
     @Override
     public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandBuildContext) {
         TimingCommand.register(dispatcher);
+        NotebopCommand.register(dispatcher);
     }
 
     @Override
