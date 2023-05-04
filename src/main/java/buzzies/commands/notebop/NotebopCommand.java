@@ -17,6 +17,9 @@ import static net.minecraft.server.command.CommandManager.*;
 public class NotebopCommand {
     public static List<NoteChannel> noteChannels = new ArrayList<>();
     public static Map<String, NoteChannel> nameToChannel = new HashMap<>();
+    //eventually allow for creation of more loops
+    public static NotebopLoop loop = new NotebopLoop(4);
+
 
     public static final String NB_CHANNEL_NAME = "note-block-channel";
     public static final String REGISTRY_COORDINATES = "registry-coordinates";
