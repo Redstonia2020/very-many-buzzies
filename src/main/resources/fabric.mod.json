@@ -26,6 +26,8 @@
     "buzzies.mixins.json"
   ],
 
+  "accessWidener" : "buzzies.accesswidener",
+
   "depends": {
     "fabricloader": ">=0.14.17",
     "fabric-api": "*",
