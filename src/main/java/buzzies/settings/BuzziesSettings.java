@@ -8,6 +8,7 @@ import static buzzies.settings.Validators.*;
 
 public class BuzziesSettings {
     public static final String BUZZIES = "buzzies";
+    public static final String WHY = "dontevenknowanymore";
 
     public enum BeeNestGenerationOptions {
         VANILLA, OFF, ALWAYS, ALWAYS_ALL;
@@ -47,4 +48,7 @@ public class BuzziesSettings {
           strict = false,
           validators = NonNegativeOrFalse.class)
     public static int xpBottleDropValue = -1;
+
+    @Rule(categories = {BUZZIES, WHY})
+    public static boolean zombiesResistDrowning = false;
 }

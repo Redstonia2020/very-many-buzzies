@@ -16,5 +16,7 @@
   "carpet.rule.lavaFlowRateUltrawarm.desc": "Controls how quickly lava flows within the nether.",
 
   "carpet.rule.xpBottleDropValue.desc": "Determines how much experience xp bottles should drop.",
-  "carpet.rule.xpBottleDropValue.extra.0": "Setting this to -1 will make it same as vanilla."
+  "carpet.rule.xpBottleDropValue.extra.0": "Setting this to -1 will make it same as vanilla.",
+
+  "carpet.rule.zombiesResistDrowning.desc": "weird"
 }

@@ -1,10 +1,11 @@
 package buzzies.commands.timing;
 
-import buzzies.commands.ExecutionFunction;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.server.command.ServerCommandSource;
+
+import java.util.function.Function;
 
 import static com.mojang.brigadier.arguments.StringArgumentType.*;
 import static com.mojang.brigadier.arguments.IntegerArgumentType.*;
@@ -31,13 +32,13 @@ public class TimingCommand {
                                 .executes(command(TimingExecution::disableExpecting))));
     }
 
-    private static LiteralArgumentBuilder<ServerCommandSource> branch(String name, ExecutionFunction<TimingExecution> runner) {
+    private static LiteralArgumentBuilder<ServerCommandSource> branch(String name, Function<TimingExecution, Integer> function) {
         return literal(name)
                 .then(argument(MESSAGE, greedyString())
-                        .executes(command(runner)));
+                        .executes(command(function)));
     }
 
-    private static Command<ServerCommandSource> command(ExecutionFunction<TimingExecution> function) {
-        return (c) -> function.run(new TimingExecution(c));
+    private static Command<ServerCommandSource> command(Function<TimingExecution, Integer> function) {
+        return c -> function.apply(new TimingExecution(c));
     }
 }
