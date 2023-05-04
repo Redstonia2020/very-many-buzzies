@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "buzzies.mixins",
+  "package": "buzzies.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "BeehiveTreeDecoratorMixin",

@@ -1,4 +1,4 @@
-package buzzies.mixins;
+package buzzies.mixin;
 
 import buzzies.settings.BuzziesSettings;
 import net.minecraft.block.BlockState;
