@@ -2,13 +2,8 @@ package buzzies.commands.notebop;
 
 import buzzies.commands.Execution;
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandExceptionType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
-import net.minecraft.block.Block;
-import net.minecraft.block.NoteBlock;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 
 import static buzzies.commands.notebop.NotebopCommand.*;
@@ -36,7 +31,7 @@ public class NotebopExecution extends Execution {
         return 1;
     }
 
-    public int play() throws CommandSyntaxException {
+    public int manualPlay() throws CommandSyntaxException {
         String channelName = getStringArgument(NB_CHANNEL_NAME);
 
         NoteChannel channel = getChannelIfExists(channelName);

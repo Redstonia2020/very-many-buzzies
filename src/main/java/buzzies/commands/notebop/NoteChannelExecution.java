@@ -7,33 +7,42 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.NoteBlock;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 
-import static buzzies.commands.CommandUtils.simpleException;
+import static buzzies.commands.CommandUtils.*;
 import static net.minecraft.block.NoteBlock.POWERED;
+import static net.minecraft.util.Formatting.*;
 
 public class NoteChannelExecution extends Execution {
     private final NoteChannel channel;
+    private final BlockPos position;
 
     public NoteChannelExecution(NoteChannel channel, CommandContext<ServerCommandSource> context) {
         super(context);
         this.channel = channel;
-    }
-
-
-
-    public void manualPlay() throws CommandSyntaxException {
-        NoteBlock block = getNoteBlock();
-        if (block == null)
-            throw simpleException("There isn't any note block at %s".formatted(channel.position.toString()));
-        world.setBlockState(channel.position, getBlockState().with(POWERED, true), Block.NOTIFY_ALL);
-        world.setBlockState(channel.position, getBlockState().with(POWERED, false), 0);
+        position = channel.position;
     }
 
     public void play() {
         NoteBlock block = getNoteBlock();
-        world.setBlockState(channel.position, getBlockState().with(POWERED, true), Block.NOTIFY_ALL);
-        world.setBlockState(channel.position, getBlockState().with(POWERED, false), 0);
+        if (block == null) {
+            send("No note block at %s".formatted(position.toString()), RED);
+        } else {
+            playNote(block);
+        }
+    }
+
+    public void manualPlay() throws CommandSyntaxException {
+        NoteBlock block = getNoteBlock();
+        if (block == null)
+            throw simpleException("There isn't any note block at %s".formatted(position.toString()));
+        playNote(block);
+    }
+
+    private void playNote(NoteBlock block) {
+        world.setBlockState(position, getBlockState().with(POWERED, true), Block.NOTIFY_ALL);
+        world.setBlockState(position, getBlockState().with(POWERED, false), 0);
+        block.playNote(null, getBlockState(), world, position);
     }
 
     private NoteBlock getNoteBlock() {
@@ -44,6 +53,6 @@ public class NoteChannelExecution extends Execution {
     }
 
     private BlockState getBlockState() {
-        return world.getBlockState(channel.position);
+        return world.getBlockState(position);
     }
 }

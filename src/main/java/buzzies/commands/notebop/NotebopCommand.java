@@ -6,8 +6,6 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.minecraft.server.command.ServerCommandSource;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -30,7 +28,7 @@ public class NotebopCommand {
                         .then(argument(REGISTRY_COORDINATES, blockPos())
                                 .executes(command(NotebopExecution::registerChannel)))
                         .then(literal("play")
-                                .executes(command(NotebopExecution::play)))));
+                                .executes(command(NotebopExecution::manualPlay)))));
     }
 
     private static Command<ServerCommandSource> command(ExecutionFunction<NotebopExecution> function) {
