@@ -22,10 +22,12 @@ public class NotebopExecution extends Execution {
         if (channel != null) {
             // channel already exists
             channel.position = pos;
+            send("Set position of channel %s to %s.".formatted(channelName, pos.toString()));
         } else {
             NoteChannel newChannel = new NoteChannel(channelName, pos);
             noteChannels.add(newChannel);
             nameToChannel.put(channelName, newChannel);
+            send("Created channel %s at %s.".formatted(channelName, pos.toString()));
         }
 
         return 1;
