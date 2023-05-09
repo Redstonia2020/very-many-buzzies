@@ -26,11 +26,12 @@ public class NotebopCommand {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("notebop")
-                .then(argument(NB_CHANNEL_NAME, word())
-                        .suggests((c,b) -> noteChannelSuggestions(b))
-                        .then(argument(REGISTRY_COORDINATES, blockPos())
-                                .executes(command(NotebopExecution::registerChannel)))
-                        .then(literal("play")
+                .then(literal("register")
+                        .then(argument(NB_CHANNEL_NAME, word())
+                                .then(argument(REGISTRY_COORDINATES, blockPos())
+                                        .executes(command(NotebopExecution::registerChannel)))))
+                .then(literal("play")
+                        .then(argument(NB_CHANNEL_NAME, word())
                                 .executes(command(NotebopExecution::manualPlay)))));
     }
 
