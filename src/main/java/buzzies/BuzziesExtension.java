@@ -36,6 +36,6 @@ public class BuzziesExtension implements CarpetExtension {
 
     @Override
     public void onTick(MinecraftServer server) {
-        
+        NotebopCommand.onTick(server);
     }
 }

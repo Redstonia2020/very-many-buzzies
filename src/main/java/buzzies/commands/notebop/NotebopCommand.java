@@ -4,7 +4,9 @@ import buzzies.commands.ExecutionFunction;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +47,9 @@ public class NotebopCommand {
                         .then(literal("add")
                                 .then(argument(NB_CHANNEL_NAME, word())
                                         .then(argument(EXECUTION_TICK, integer(0))
-                                                .executes(command(NotebopExecution::addEntry)))))));
+                                                .executes(command(NotebopExecution::addEntry)))))
+                        .then(literal("start")
+                                .executes(command(NotebopExecution::startLoop)))));
     }
 
     private static Command<ServerCommandSource> command(ExecutionFunction<NotebopExecution> function) {
@@ -54,10 +58,14 @@ public class NotebopCommand {
 
     private static RequiredArgumentBuilder<ServerCommandSource, String> noteChannelNameArgument() {
         return argument(NB_CHANNEL_NAME, word())
-                .suggests((c,b) -> {
+                .suggests((c, b) -> {
                     for (NoteChannel channel : noteChannels)
                         b.suggest(channel.name);
                     return b.buildFuture();
                 });
+    }
+
+    public static void onTick(MinecraftServer server) {
+        loop.onTick(server);
     }
 }

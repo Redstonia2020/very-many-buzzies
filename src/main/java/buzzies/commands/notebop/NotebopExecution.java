@@ -85,6 +85,11 @@ public class NotebopExecution extends Execution {
         return 1;
     }
 
+    public int startLoop() {
+        loop.start();
+        return 1;
+    }
+
     private NoteChannel getChannel(String name) {
         return nameToChannel.get(name);
     }

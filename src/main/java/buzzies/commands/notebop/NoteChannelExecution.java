@@ -25,11 +25,8 @@ public class NoteChannelExecution extends Execution {
 
     public void play() {
         NoteBlock block = getNoteBlock();
-        if (block == null) {
-            send("No note block at %s".formatted(position.toString()), RED);
-        } else {
+        if (block != null)
             playNote(block);
-        }
     }
 
     public void manualPlay() throws CommandSyntaxException {
