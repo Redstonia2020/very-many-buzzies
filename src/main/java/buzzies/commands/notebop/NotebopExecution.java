@@ -23,12 +23,12 @@ public class NotebopExecution extends Execution {
         if (channel != null) {
             // channel already exists
             channel.position = pos;
-            send("Set position of channel %s to %s.".formatted(channelName, pos.toString()));
+            send("Set position of %s to %s.".formatted(channelName, pos.toString()));
         } else {
             NoteChannel newChannel = new NoteChannel(channelName, pos);
             noteChannels.add(newChannel);
             nameToChannel.put(channelName, newChannel);
-            send("Created channel %s at %s.".formatted(channelName, pos.toString()));
+            send("Registered %s at %s.".formatted(channelName, pos.toString()));
         }
 
         return 1;
@@ -68,7 +68,7 @@ public class NotebopExecution extends Execution {
         int cycleTime = getIntArgument(CYCLE_TIME);
 
         loop.cycleTime = cycleTime;
-        send("Set cycle to %s ticks.".formatted(cycleTime));
+        send("Set cycle to %s ticks".formatted(cycleTime));
 
         return 1;
     }
@@ -78,7 +78,9 @@ public class NotebopExecution extends Execution {
         int executionTick = getIntArgument(EXECUTION_TICK);
 
         loop.entries.add(new NoteLoopEntry(getChannelIfExists(channelName), executionTick));
-        send("Added entry to loop: channel %s at tick %s".formatted(channelName, executionTick));
+        send("Added to loop: %s at tick %s".formatted(channelName, executionTick));
+        if (executionTick < loop.cycleTime)
+            send(" Warning: this happens outside the loop, and will not run!", YELLOW);
 
         return 1;
     }
@@ -91,6 +93,6 @@ public class NotebopExecution extends Execution {
         NoteChannel channel = getChannel(name);
         if (channel != null)
             return channel;
-        throw simpleException("Note block channel %s does not exist! Please register it first!".formatted(name));
+        throw simpleException("%s does not exist! Please register it first!".formatted(name));
     }
 }
