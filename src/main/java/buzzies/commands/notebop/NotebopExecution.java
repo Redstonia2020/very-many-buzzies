@@ -43,7 +43,11 @@ public class NotebopExecution extends Execution {
     }
 
     public int setCycleTime() {
-        loop.cycleTime = getIntArgument(CYCLE_TIME);
+        int cycleTime = getIntArgument(CYCLE_TIME);
+
+        loop.cycleTime = cycleTime;
+        send("Set cycle to %s ticks.".formatted(cycleTime));
+
         return 1;
     }
 
