@@ -44,16 +44,21 @@ public class NotebopExecution extends Execution {
     }
 
     public int showLoop() {
-        send("--== Notebop Loop ==--", GREEN);
+        send("===== Notebop Loop =====", GREEN);
 
         int currentTick = 0;
         // look at this poopoo colour alternating code
         boolean colorFLIP = true;
+        boolean wentPastWhereOneShouldNotGo = false;
 
         for (NoteLoopEntry entry : loop.entriesByTick()) {
             if (entry.tick > currentTick) {
                 currentTick = entry.tick;
                 colorFLIP = !colorFLIP;
+                if (!wentPastWhereOneShouldNotGo && currentTick >= loop.cycleTime) {
+                    send("The loop ends here; anything past this won't get executed unless you increase the cycle time.", YELLOW);
+                    wentPastWhereOneShouldNotGo = true;
+                }
                 send("%s - %s".formatted(currentTick, entry.channel.name), colorFLIP ? GRAY : WHITE);
             } else {
                 // yes, this breaks with 2-digit numbers. fix later
@@ -61,6 +66,7 @@ public class NotebopExecution extends Execution {
             }
         }
 
+        send("========================", GREEN);
         return 1;
     }
 
@@ -79,7 +85,7 @@ public class NotebopExecution extends Execution {
 
         loop.entries.add(new NoteLoopEntry(getChannelIfExists(channelName), executionTick));
         send("Added to loop: %s at tick %s".formatted(channelName, executionTick));
-        if (executionTick < loop.cycleTime)
+        if (executionTick >= loop.cycleTime)
             send(" Warning: this happens outside the loop, and will not run!", YELLOW);
 
         return 1;
