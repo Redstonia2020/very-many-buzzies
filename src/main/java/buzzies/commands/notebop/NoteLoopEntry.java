@@ -1,10 +1,10 @@
 package buzzies.commands.notebop;
 
-public class NotebopLoopEntry {
+public class NoteLoopEntry {
     public NoteChannel channel;
     public int tick;
 
-    public NotebopLoopEntry(NoteChannel channel, int tick) {
+    public NoteLoopEntry(NoteChannel channel, int tick) {
         this.channel = channel;
         this.tick = tick;
     }

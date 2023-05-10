@@ -47,15 +47,17 @@ public class NotebopExecution extends Execution {
         send("--== Notebop Loop ==--", GREEN);
 
         int currentTick = 0;
-        boolean flip = true;
-        for (NotebopLoopEntry entry : loop.entriesByTick()) {
+        // look at this poopoo colour alternating code
+        boolean colorFLIP = true;
+
+        for (NoteLoopEntry entry : loop.entriesByTick()) {
             if (entry.tick > currentTick) {
                 currentTick = entry.tick;
-                flip = !flip;
-                send("%s - %s".formatted(currentTick, entry.channel.name), flip ? GRAY : WHITE);
+                colorFLIP = !colorFLIP;
+                send("%s - %s".formatted(currentTick, entry.channel.name), colorFLIP ? GRAY : WHITE);
             } else {
                 // yes, this breaks with 2-digit numbers. fix later
-                send("   - %s".formatted(entry.channel.name), flip ? GRAY : WHITE);
+                send("   - %s".formatted(entry.channel.name), colorFLIP ? GRAY : WHITE);
             }
         }
 
@@ -75,7 +77,7 @@ public class NotebopExecution extends Execution {
         String channelName = getStringArgument(NB_CHANNEL_NAME);
         int executionTick = getIntArgument(EXECUTION_TICK);
 
-        loop.entries.add(new NotebopLoopEntry(getChannelIfExists(channelName), executionTick));
+        loop.entries.add(new NoteLoopEntry(getChannelIfExists(channelName), executionTick));
         send("Added entry to loop: channel %s at tick %s".formatted(channelName, executionTick));
 
         return 1;
