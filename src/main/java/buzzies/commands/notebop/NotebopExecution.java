@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 
 import static buzzies.commands.notebop.NotebopCommand.*;
 import static buzzies.commands.CommandUtils.*;
+import static net.minecraft.util.Formatting.*;
 
 public class NotebopExecution extends Execution {
     public NotebopExecution(CommandContext<ServerCommandSource> context) {
@@ -38,6 +39,25 @@ public class NotebopExecution extends Execution {
 
         NoteChannel channel = getChannelIfExists(channelName);
         channel.newExecution(context).manualPlay();
+
+        return 1;
+    }
+
+    public int showLoop() {
+        send("--== Notebop Loop ==--", GREEN);
+
+        int currentTick = 0;
+        boolean flip = true;
+        for (NotebopLoopEntry entry : loop.entriesByTick()) {
+            if (entry.tick > currentTick) {
+                currentTick = entry.tick;
+                flip = !flip;
+                send("%s - %s".formatted(currentTick, entry.channel.name), flip ? GRAY : WHITE);
+            } else {
+                // yes, this breaks with 2-digit numbers. fix later
+                send("   - %s".formatted(entry.channel.name), flip ? GRAY : WHITE);
+            }
+        }
 
         return 1;
     }
