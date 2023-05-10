@@ -7,6 +7,7 @@ import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 
 import java.util.Map;
@@ -31,5 +32,10 @@ public class BuzziesExtension implements CarpetExtension {
     @Override
     public Map<String, String> canHasTranslations(String lang) {
         return BuzziesTranslations.getTranslation(lang);
+    }
+
+    @Override
+    public void onTick(MinecraftServer server) {
+        
     }
 }

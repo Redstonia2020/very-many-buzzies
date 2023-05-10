@@ -47,6 +47,16 @@ public class NotebopExecution extends Execution {
         return 1;
     }
 
+    public int addEntry() throws CommandSyntaxException {
+        String channelName = getStringArgument(NB_CHANNEL_NAME);
+        int executionTick = getIntArgument(EXECUTION_TICK);
+
+        loop.entries.add(new NotebopLoopEntry(getChannelIfExists(channelName), executionTick));
+        send("Added entry to loop: channel %s at tick %s".formatted(channelName, executionTick));
+
+        return 1;
+    }
+
     private NoteChannel getChannel(String name) {
         return nameToChannel.get(name);
     }
