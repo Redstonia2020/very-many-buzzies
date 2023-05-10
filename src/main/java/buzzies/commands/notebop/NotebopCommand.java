@@ -11,6 +11,7 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 import static com.mojang.brigadier.arguments.StringArgumentType.*;
+import static com.mojang.brigadier.arguments.IntegerArgumentType.*;
 import static net.minecraft.command.argument.BlockPosArgumentType.*;
 import static net.minecraft.server.command.CommandManager.*;
 
@@ -23,6 +24,7 @@ public class NotebopCommand {
 
     public static final String NB_CHANNEL_NAME = "note-block-channel";
     public static final String REGISTRY_COORDINATES = "registry-coordinates";
+    public static final String CYCLE_TIME = "cycle-time";
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("notebop")
@@ -32,7 +34,10 @@ public class NotebopCommand {
                                         .executes(command(NotebopExecution::registerChannel)))))
                 .then(literal("play")
                         .then(argument(NB_CHANNEL_NAME, word())
-                                .executes(command(NotebopExecution::manualPlay)))));
+                                .executes(command(NotebopExecution::manualPlay))))
+                .then(literal("setCycle")
+                        .then(argument(CYCLE_TIME, integer(0))
+                                .executes(command(NotebopExecution::setCycleTime)))));
     }
 
     private static Command<ServerCommandSource> command(ExecutionFunction<NotebopExecution> function) {

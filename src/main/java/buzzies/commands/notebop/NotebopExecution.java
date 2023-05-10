@@ -42,6 +42,11 @@ public class NotebopExecution extends Execution {
         return 1;
     }
 
+    public int setCycleTime() {
+        loop.cycleTime = getIntArgument(CYCLE_TIME);
+        return 1;
+    }
+
     private NoteChannel getChannel(String name) {
         return nameToChannel.get(name);
     }
