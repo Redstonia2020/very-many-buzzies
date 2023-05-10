@@ -5,8 +5,10 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import net.minecraft.server.command.ServerCommandSource;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.mojang.brigadier.arguments.StringArgumentType.*;
 import static com.mojang.brigadier.arguments.IntegerArgumentType.*;
