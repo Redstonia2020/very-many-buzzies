@@ -49,7 +49,9 @@ public class NotebopCommand {
                                         .then(argument(EXECUTION_TICK, integer(0))
                                                 .executes(command(NotebopExecution::addEntry)))))
                         .then(literal("start")
-                                .executes(command(NotebopExecution::startLoop)))));
+                                .executes(command(NotebopExecution::startLoop)))
+                        .then(literal("end")
+                                .executes(command(NotebopExecution::stopLoop)))));
     }
 
     private static Command<ServerCommandSource> command(ExecutionFunction<NotebopExecution> function) {
