@@ -32,7 +32,7 @@ public class NotebopCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("notebop")
                 .then(literal("register")
-                        .then(noteChannelNameArgument()
+                        .then(argument(NB_CHANNEL_NAME, word())
                                 .then(argument(REGISTRY_COORDINATES, blockPos())
                                         .executes(command(NotebopExecution::registerChannel)))))
                 .then(literal("play")
@@ -45,7 +45,7 @@ public class NotebopCommand {
                                 .then(argument(CYCLE_TIME, integer(0))
                                         .executes(command(NotebopExecution::setCycleTime))))
                         .then(literal("add")
-                                .then(argument(NB_CHANNEL_NAME, word())
+                                .then(noteChannelNameArgument()
                                         .then(argument(EXECUTION_TICK, integer(0))
                                                 .executes(command(NotebopExecution::addEntry)))))
                         .then(literal("start")
